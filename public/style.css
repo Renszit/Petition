@@ -1,0 +1,12 @@
+body {
+    background-color: pink;
+}
+
+footer {
+    position: fixed;
+    bottom: 0px;
+}
+
+canvas {
+    background-color: white;
+}
