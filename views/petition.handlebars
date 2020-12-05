@@ -1,13 +1,10 @@
 <div class="titleContainer">
-<h1 class="title">Petition for the return of the PC turbo button.</h1>
-<h3 class= "checkitout">because, look at it. It is so useless yet cool looking.</h3>
-<div class="smallText">
-    <p>We can make this happen.</p> 
-    <p>Let major PC companies reinvent the turbo button!</p>
-    <p>Sign now!</p>
-    </div>
-    
+<h1 class="title">Start putting turbo buttons on pc's again.</h1>
+<h3 class= "checkitout">Sign the petition now! I mean, who would NOT want a button they can push and the pc goes whooosh? Exaaactly. Sign and we will hand the signatures over to Bill Gates personally.</h3>  
 </div>
+
+
+<div class="formContainer">
 <img id = "turbo" src="/ax98qPb_700b.jpg" alt="Picture of a pc with a turbo button">
 <form action="" method="POST" class="form">
     <input type="hidden" name="_csrf" value="{{csrfToken}}">
@@ -15,14 +12,19 @@
     <div class="error">Something went wrong there, please try again. Did you fill out the complete form?</div>
     {{/if}}
     <div class="inputField">
-        <label for="firstname">First name:</label>
+        <label for="firstname">First name</label>
             <input type="text" name="first" required>
-        <label for="lastname">Last name:</label>
+        <label for="lastname">Last name</label>
             <input type="text" name="last" required>
     </div>
+    <div id="canvasInput">
     <input id="signature" type="hidden" name="signature">
-        <h4>sign here please</h4>
-        <canvas id="canvas" width="400" height="150" required></canvas>
+        <label for="canvas">Sign here</label>
+        <canvas id="canvas" width="600" name="canvas" height="140" required></canvas>
+        
     <button type="submit" id="submit">Submit</button>
+    </div>
+
 </form>
+</div>
 

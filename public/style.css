@@ -1,5 +1,6 @@
 * {
     margin: 0;
+    box-sizing: border-box;
 }
 
 body {
@@ -9,69 +10,162 @@ body {
 footer {
     position: fixed;
     bottom: 0px;
-}
-
-.title {
     font-family: Lato;
-    color: #f2b5d4;
-    font-size: 80px;
     margin: 10px;
-}
-
-.smallText{
-    font-family: lato;
-    color: #F7D6E0;
-    font-size: 30px;
-    margin: 10px;
-
-}
-.error {
-    font-family: Lato;
-    color: #E29578;
-}
-
-.checkitout {
-    font-family: Lato;
-    color: #f7d6e0;
-    font-size: 40px;
-    margin: 10px;
-    margin-top: 0;
-}
-
-canvas {
-    background-color: #EFF7F6;
-    border: 2px dotted #75485E;
-    cursor: crosshair;
-    /* margin: 10px; */
+    font-size: 10px;
+    color: #75485e;
 }
 
 .titleContainer {
     display: flex;
     flex-direction: column;
-    width: 50%;
     margin: 10px;
 }
 
-.form {
-    display: flex;
-    flex-direction: column;
-    width: 40%;
-    position: absolute;
-    right: 0;
-    bottom: 0;
-    margin-right: 30px;
-    margin-bottom: 40px;
+.title {
+    font-family: Lato;
+    /* color: #65655E; */
+    width: 50%;
+    font-size: 60px;
+    margin: 10px;
+    animation: text-shadow 1.5s ease-in-out;
+    font-weight: 900;
 }
 
+@keyframes text-shadow {
+    0% {  
+        transform: translateY(0);
+        text-shadow: 
+            0 0 0 #0c2ffb, 
+            0 0 0 #2cfcfd, 
+            0 0 0 #fb203b, 
+            0 0 0 #fefc4b;
+    }
+
+    20% {  
+        transform: translateY(-1em);
+        text-shadow: 
+            0 0.125em 0 #0c2ffb, 
+            0 0.25em 0 #2cfcfd, 
+            0 -0.125em 0 #fb203b, 
+            0 -0.25em 0 #fefc4b;
+    }
+
+    40% {  
+        transform: translateY(0.5em);
+        text-shadow: 
+            0 -0.0625em 0 #0c2ffb, 
+            0 -0.125em 0 #2cfcfd, 
+            0 0.0625em 0 #fb203b, 
+            0 0.125em 0 #fefc4b;
+    }
+    
+   60% {
+        transform: translateY(-0.25em);
+        text-shadow: 
+            0 0.03125em 0 #0c2ffb, 
+            0 0.0625em 0 #2cfcfd, 
+            0 -0.03125em 0 #fb203b, 
+            0 -0.0625em 0 #fefc4b;
+    }
+
+    80% {  
+        transform: translateY(0);
+        text-shadow: 
+            0 0 0 #0c2ffb, 
+            0 0 0 #2cfcfd, 
+            0 0 0 #fb203b, 
+            0 0 0 #fefc4b;
+    }
+}
+
+/* petition handlebars */
+
+.error {
+    font-family: Lato;
+    color: #e29578;
+    margin: 10px;   
+}
+
+.checkitout {
+    font-family: Lato;
+    color: #f7d6e0;
+    font-size: 35px;
+    margin: 10px;
+    margin-top: 0;
+}
+
+.formContainer {
+    font-family: "Lato";
+    display: flex;
+    margin: 10px;
+    width: 100%;
+}
+
+.form {
+    width: 600px;
+    height: 270px;
+    margin: 10px;
+}
+
+canvas {
+    background-color: #eff7f6;
+    border: 1px dashed #75485e;
+    cursor: crosshair;
+    width: 600px;
+    height:140px;
+}
+
+#canvasInput {
+    display:flex;
+    flex-direction: column;
+}
+
+label {
+    margin-top:10px;
+}
+
+.inputField {
+    display:flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+/* image */
 #turbo {
     display: flex;
-    position: absolute;
-    right: 0;
-    top: 0;
+    margin: 10px;
+    margin-top:20px;
     height: 40%;
     width: 40%;
-    margin-top: 20px;
-    margin-right: 30px;
     object-fit: cover;
     border: inset 5px #75485e;
+}
+
+/* submit button */
+#submit {
+    font-family: 'Lato';
+    width: 170px;
+    height: 40px;
+    border: solid 2px #75485e;
+    color: #75485e;
+    background-color: #EFF7F6;
+    border-radius: 40px;
+    transition: all .35s;
+    margin-top: 10px;
+}
+
+#submit:hover {
+    color: #EFF7F6;
+    background-color: #75485e;
+}
+
+/* signers handlebars */
+
+.nameList {
+    display: flex;
+    flex-direction: column;
+    font-family: 'Lato';
+    color: #f7d6e0;
+    text-align: center;
 }

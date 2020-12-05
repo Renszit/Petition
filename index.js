@@ -90,7 +90,7 @@ app.get("/thanks", (req, res) => {
                 let numberReg = rows[0].count;
                 db.getSig(req.session.id).then(({ rows }) => {
                     let userSignature = rows[0].signature;
-                    res.render("thanks", { numberReg, userSignature });
+                    res.render("thanks", { numberReg, userSignature, });
                 });
             })
             .catch((err) => {

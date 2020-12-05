@@ -1,4 +1,4 @@
-DROP TABLE IF EXISTS petition
+DROP TABLE IF EXISTS petition;
 
  CREATE TABLE petition (
      id SERIAL PRIMARY KEY,
