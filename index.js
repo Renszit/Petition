@@ -18,7 +18,7 @@ app.use((req, res, next) => {
 
 app.use(
     cookieSession({
-        secret: `I'm always angry.`,
+        secret: `Kill them with kindness`,
         maxAge: 1000 * 60 * 60 * 24 * 7 * 6,
     })
 );
@@ -43,14 +43,20 @@ app.get("/", (req, res) => {
 });
 
 app.get("/petition", (req, res) => {
-    res.render("petition");
+    if (req.session.registered == true) {
+        res.redirect("/thanks");
+    } else {
+        res.render("petition");
+    }
 });
 
 //post request
 app.post("/petition", (req, res) => {
     let { first, last, signature } = req.body;
     db.addSignature(first, last, signature)
-        .then(() => {
+        .then(({ rows }) => {
+            req.session.id = rows[0].id;
+            req.session.registered = true;
             res.redirect("thanks");
         })
         .catch((err) => {
@@ -60,11 +66,35 @@ app.post("/petition", (req, res) => {
 });
 
 app.get("/signers", (req, res) => {
-    res.render("signers", {});
+    if (req.session.registered != true) {
+        res.redirect("/petition");
+    } else {
+        db.signees()
+            .then(({ rows }) => {
+                res.render("signers", { rows });
+            })
+            .catch((err) => {
+                console.log("error in signers", err);
+            });
+    }
 });
 
 app.get("/thanks", (req, res) => {
-    res.render("thanks", {});
+    if (!req.session.registered) {
+        res.redirect("/petition");
+    } else {
+        db.registered()
+            .then(({ rows }) => {
+                let numberReg = rows[0].count;
+                db.getSig(req.session.id).then(({ rows }) => {
+                    let userSignature = rows[0].signature;
+                    res.render("thanks", { numberReg, userSignature });
+                });
+            })
+            .catch((err) => {
+                console.log("error in thanks", err);
+            });
+    }
 });
 
 app.listen(8080, () => console.log("I am listening sire"));

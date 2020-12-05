@@ -22,6 +22,8 @@ footer {
     font-family: lato;
     color: #F7D6E0;
     font-size: 30px;
+    margin: 10px;
+
 }
 
 .checkitout {
@@ -33,9 +35,10 @@ footer {
 }
 
 canvas {
-    background-color: white;
-    border: 2px dotted black;
+    background-color: #EFF7F6;
+    border: 2px dotted #75485E;
     cursor: crosshair;
+    /* margin: 10px; */
 }
 
 .titleContainer {
