@@ -3,7 +3,9 @@ const app = express();
 const db = require("./db");
 const hb = require("express-handlebars");
 const csurf = require("csurf");
+const cookieSession = require("cookie-session");
 
+app.use(express.static("./public"));
 app.engine("handlebars", hb());
 app.set("view engine", "handlebars");
 
@@ -14,7 +16,12 @@ app.use((req, res, next) => {
     next();
 });
 
-app.use(express.static("./public"));
+app.use(
+    cookieSession({
+        secret: `I'm always angry.`,
+        maxAge: 1000 * 60 * 60 * 24 * 7 * 6,
+    })
+);
 
 app.use(
     express.urlencoded({
@@ -31,7 +38,7 @@ app.use((req, res, next) => {
 });
 
 // temporary redirect to petition
-app.get("/", (req, res) =>{
+app.get("/", (req, res) => {
     res.redirect("/petition");
 });
 
@@ -47,21 +54,17 @@ app.post("/petition", (req, res) => {
             res.redirect("thanks");
         })
         .catch((err) => {
-            res.render("petition", {
-            });
+            res.render("petition", {});
             console.log("posting did not work", err);
-            
         });
 });
 
 app.get("/signers", (req, res) => {
-    res.render("signers", {
-    });
+    res.render("signers", {});
 });
 
 app.get("/thanks", (req, res) => {
-    res.render("thanks", {
-    });
+    res.render("thanks", {});
 });
 
 app.listen(8080, () => console.log("I am listening sire"));

@@ -1,5 +1,9 @@
+* {
+    margin: 0;
+}
+
 body {
-    background-color: pink;
+    background-color: #eff7f6;
 }
 
 footer {
@@ -7,8 +11,59 @@ footer {
     bottom: 0px;
 }
 
+.title {
+    font-family: Lato;
+    color: #f2b5d4;
+    font-size: 80px;
+    margin: 10px;
+}
+
+.smallText{
+    font-family: lato;
+    color: #F7D6E0;
+    font-size: 30px;
+}
+
+.checkitout {
+    font-family: Lato;
+    color: #f7d6e0;
+    font-size: 40px;
+    margin: 10px;
+    margin-top: 0;
+}
+
 canvas {
     background-color: white;
     border: 2px dotted black;
     cursor: crosshair;
+}
+
+.titleContainer {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 40%;
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    margin-right: 40px;
+    margin-bottom: 40px;
+}
+
+#turbo {
+    display: flex;
+    position: absolute;
+    right: 0;
+    top: 0;
+    height: 300px;
+    width: 40%;
+    margin-top: 20px;
+    margin-right: 40px;
+    object-fit: cover;
+    border: inset 5px #75485e;
 }
