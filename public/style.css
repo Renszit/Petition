@@ -122,7 +122,8 @@ canvas {
 }
 
 label {
-    margin-top:10px;
+    margin-top:5px;
+    margin-bottom:5px; 
 }
 
 .inputField {
@@ -139,7 +140,7 @@ label {
     height: 40%;
     width: 40%;
     object-fit: cover;
-    border: inset 5px #75485e;
+    border: inset 5px #E29578;
 }
 
 /* submit button */
@@ -147,8 +148,8 @@ label {
     font-family: 'Lato';
     width: 170px;
     height: 40px;
-    border: solid 2px #75485e;
-    color: #75485e;
+    border: solid 2px #E29578;
+    color: #E29578;
     background-color: #EFF7F6;
     border-radius: 40px;
     transition: all .35s;
@@ -157,7 +158,7 @@ label {
 
 #submit:hover {
     color: #EFF7F6;
-    background-color: #75485e;
+    background-color: #E29578;
 }
 
 /* signers handlebars */
