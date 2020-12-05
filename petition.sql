@@ -1,6 +1,6 @@
-DROP TABLE IF EXISTS signatures
+DROP TABLE IF EXISTS petition
 
- CREATE TABLE signatures (
+ CREATE TABLE petition (
      id SERIAL PRIMARY KEY,
      first VARCHAR NOT NULL CHECK (first != ''),
      last VARCHAR NOT NULL CHECK (last != ''),

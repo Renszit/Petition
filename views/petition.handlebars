@@ -1,12 +1,15 @@
-<h1>This is the petition page, WELCOME!</h1>
+<h1>Petition for the return of the pc turbo button</h1>
 
 <form action="" method="POST" class="form">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
     <div class="inputField">
         <label for="firstname">First name:</label>
-            <input type="text" name="firstname">
+            <input type="text" name="first">
         <label for="lastname">Last name:</label>
-            <input type="text" name="firstname">
+            <input type="text" name="last">
     </div>
-    <canvas width="400" height="150"></canvas>
-    <button type="submit">Submit</button>
+    <input id="signature" type="hidden" name="signature">
+        <h4>sign here please</h4>
+        <canvas id="canvas" width="400" height="150"></canvas>
+    <button type="submit" id="submit">Submit</button>
 </form>

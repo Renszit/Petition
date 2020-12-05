@@ -9,4 +9,6 @@ footer {
 
 canvas {
     background-color: white;
+    border: 2px dotted black;
+    cursor: crosshair;
 }
