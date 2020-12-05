@@ -60,7 +60,9 @@ app.post("/petition", (req, res) => {
             res.redirect("thanks");
         })
         .catch((err) => {
-            res.render("petition", {});
+            res.render("petition",{
+                incomplete: true
+            });
             console.log("posting did not work", err);
         });
 });

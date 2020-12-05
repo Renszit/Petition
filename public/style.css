@@ -25,6 +25,10 @@ footer {
     margin: 10px;
 
 }
+.error {
+    font-family: Lato;
+    color: #E29578;
+}
 
 .checkitout {
     font-family: Lato;
@@ -45,6 +49,7 @@ canvas {
     display: flex;
     flex-direction: column;
     width: 50%;
+    margin: 10px;
 }
 
 .form {
@@ -54,7 +59,7 @@ canvas {
     position: absolute;
     right: 0;
     bottom: 0;
-    margin-right: 40px;
+    margin-right: 30px;
     margin-bottom: 40px;
 }
 
@@ -63,10 +68,10 @@ canvas {
     position: absolute;
     right: 0;
     top: 0;
-    height: 300px;
+    height: 40%;
     width: 40%;
     margin-top: 20px;
-    margin-right: 40px;
+    margin-right: 30px;
     object-fit: cover;
     border: inset 5px #75485e;
 }
