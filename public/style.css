@@ -33,49 +33,32 @@ footer {
 }
 
 @keyframes text-shadow {
-    0% {  
+    0% {
         transform: translateY(0);
-        text-shadow: 
-            0 0 0 #0c2ffb, 
-            0 0 0 #2cfcfd, 
-            0 0 0 #fb203b, 
-            0 0 0 #fefc4b;
+        text-shadow: 0 0 0 #0c2ffb, 0 0 0 #2cfcfd, 0 0 0 #fb203b, 0 0 0 #fefc4b;
     }
 
-    20% {  
+    20% {
         transform: translateY(-1em);
-        text-shadow: 
-            0 0.125em 0 #0c2ffb, 
-            0 0.25em 0 #2cfcfd, 
-            0 -0.125em 0 #fb203b, 
-            0 -0.25em 0 #fefc4b;
+        text-shadow: 0 0.125em 0 #0c2ffb, 0 0.25em 0 #2cfcfd,
+            0 -0.125em 0 #fb203b, 0 -0.25em 0 #fefc4b;
     }
 
-    40% {  
+    40% {
         transform: translateY(0.5em);
-        text-shadow: 
-            0 -0.0625em 0 #0c2ffb, 
-            0 -0.125em 0 #2cfcfd, 
-            0 0.0625em 0 #fb203b, 
-            0 0.125em 0 #fefc4b;
-    }
-    
-   60% {
-        transform: translateY(-0.25em);
-        text-shadow: 
-            0 0.03125em 0 #0c2ffb, 
-            0 0.0625em 0 #2cfcfd, 
-            0 -0.03125em 0 #fb203b, 
-            0 -0.0625em 0 #fefc4b;
+        text-shadow: 0 -0.0625em 0 #0c2ffb, 0 -0.125em 0 #2cfcfd,
+            0 0.0625em 0 #fb203b, 0 0.125em 0 #fefc4b;
     }
 
-    80% {  
+    60% {
+        transform: translateY(-0.25em);
+        text-shadow: 0 0.03125em 0 #0c2ffb, 0 0.0625em 0 #2cfcfd,
+            0 -0.03125em 0 #fb203b, 0 -0.0625em 0 #fefc4b;
+    }
+
+    80% {
         transform: translateY(0);
-        text-shadow: 
-            0 0 0 #0c2ffb, 
-            0 0 0 #2cfcfd, 
-            0 0 0 #fb203b, 
-            0 0 0 #fefc4b;
+        text-shadow: 0 0 0 #0c2ffb, 0 0 0 #2cfcfd, 0 0 0 #fb203b, 0 0 0 #fefc4b;
     }
 }
 
@@ -84,7 +67,7 @@ footer {
 .error {
     font-family: Lato;
     color: #e29578;
-    margin: 10px;   
+    margin: 10px;
 }
 
 .checkitout {
@@ -113,21 +96,21 @@ canvas {
     border: 1px dashed #75485e;
     cursor: crosshair;
     width: 600px;
-    height:140px;
+    height: 140px;
 }
 
 #canvasInput {
-    display:flex;
+    display: flex;
     flex-direction: column;
 }
 
 label {
-    margin-top:5px;
-    margin-bottom:5px; 
+    margin-top: 5px;
+    margin-bottom: 5px;
 }
 
 .inputField {
-    display:flex;
+    display: flex;
     flex-direction: column;
     width: 50%;
 }
@@ -136,29 +119,91 @@ label {
 #turbo {
     display: flex;
     margin: 10px;
-    margin-top:20px;
+    margin-top: 20px;
     height: 40%;
     width: 40%;
     object-fit: cover;
-    border: inset 5px #E29578;
+    border: inset 5px #e29578;
 }
 
 /* submit button */
-#submit {
-    font-family: 'Lato';
-    width: 170px;
-    height: 40px;
-    border: solid 2px #E29578;
-    color: #E29578;
-    background-color: #EFF7F6;
-    border-radius: 40px;
-    transition: all .35s;
+
+.buttonDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100%;
+    background: #eff7f6;
     margin-top: 10px;
+    text-decoration: none;
 }
 
-#submit:hover {
-    color: #EFF7F6;
-    background-color: #E29578;
+.submit {
+    font-family: "Lato";
+    font-size: 24px;
+    color: #e29578;
+    position: relative;
+    transform: scale(1);
+    padding: 10px 50px 10px 20px;
+    border: none;
+    background-color: #eff7f6;
+    transition: all 0.3s;
+}
+
+.submit .bg {
+    background: #e29578;
+    width: 30px;
+    height: 2px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    margin-top: -1px;
+    z-index: -1;
+    transition: all 0.3s;
+}
+
+.submit:hover {
+    color: #fff;
+    padding-right: 20px;
+}
+.submit:hover .bg {
+    height: 100%;
+    width: 100%;
+    transform: translate(0, -50%);
+}
+
+.submit .bg:before,
+.submit .bg:after {
+    content: '';
+    height: 2px;
+    width: 10px;
+    background: #e29578;
+    position: absolute;
+    right: -2px;
+    transition: all 0.3s;
+}
+
+.submit .bg:before {
+    bottom: 3px;
+    transform: rotate(45deg);
+}
+
+.submit .bg:after {
+    top: 3px;
+    transform: rotate(-45deg);
+}
+
+.submit:hover .bg:before,
+.submit:hover .bg:after {
+    right: 0;
+}
+
+.submit:hover .bg:before {
+    bottom: 6px;
+}
+
+.submit:hover .bg:after {
+    top: 6px;
 }
 
 /* signers handlebars */
@@ -166,7 +211,7 @@ label {
 .nameList {
     display: flex;
     flex-direction: column;
-    font-family: 'Lato';
+    font-family: "Lato";
     color: #f7d6e0;
     text-align: center;
 }

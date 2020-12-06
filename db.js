@@ -17,8 +17,7 @@ module.exports.signees = () => {
     return db.query("SELECT first,last FROM petition");
 };
 
-
 module.exports.getSig = (id) => {
     let params = [id];
-    return db.query("SELECT signature FROM petition WHERE id = ($1)", params);
+    return db.query("SELECT signature, first FROM petition WHERE id = ($1)", params);
 };

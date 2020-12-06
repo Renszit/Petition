@@ -73,7 +73,9 @@ app.get("/signers", (req, res) => {
     } else {
         db.signees()
             .then(({ rows }) => {
-                res.render("signers", { rows });
+                res.render("signers", { 
+                    rows 
+                });
             })
             .catch((err) => {
                 console.log("error in signers", err);
@@ -90,7 +92,12 @@ app.get("/thanks", (req, res) => {
                 let numberReg = rows[0].count;
                 db.getSig(req.session.id).then(({ rows }) => {
                     let userSignature = rows[0].signature;
-                    res.render("thanks", { numberReg, userSignature, });
+                    let userName = rows[0].first;
+                    res.render("thanks", { 
+                        numberReg, 
+                        userSignature, 
+                        userName,
+                    });
                 });
             })
             .catch((err) => {
