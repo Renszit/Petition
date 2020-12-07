@@ -9,14 +9,8 @@
     <form action="" method="POST" class="form">
     <input type="hidden" name="_csrf" value="{{csrfToken}}">
     {{#if incomplete}}
-    <div class="error">Something went wrong there, please try again. Did you fill out the complete form?</div>
+    <div class="error">Something went wrong there, please try again. Did you actually sign?!</div>
     {{/if}}
-    <div class="inputField">
-        <label for="firstname">First name</label>
-            <input type="text" name="first" required>
-        <label for="lastname">Last name</label>
-            <input type="text" name="last" required>
-    </div>
     <div id="canvasInput">
     <input id="signature" type="hidden" name="signature">
         <label for="canvas">Sign here, it's one of those drawing pad thingies</label>

@@ -4,6 +4,7 @@ const db = require("./db");
 const hb = require("express-handlebars");
 const csurf = require("csurf");
 const cookieSession = require("cookie-session");
+const { hash, compare } = require("./bc");
 
 app.use(express.static("./public"));
 app.engine("handlebars", hb());
@@ -37,44 +38,100 @@ app.use((req, res, next) => {
     next();
 });
 
-// temporary redirect to petition
+//  redirect to register
 app.get("/", (req, res) => {
-    res.redirect("/petition");
+    res.redirect("/register");
 });
 
-app.get("/petition", (req, res) => {
+//register
+app.get("/register", (req, res) => {
     if (req.session.registered == true) {
-        res.redirect("/thanks");
+        res.redirect("petition");
     } else {
-        res.render("petition");
+        res.render("register"), {};
     }
 });
 
-//post request
+app.post("/register", (req, res) => {
+    let { first, last, email, pass } = req.body;
+    hash(pass).then((hash) => {
+        db.addRegister(first, last, email, hash)
+            .then(({ rows }) => {
+                req.session.user_id = rows[0].id;
+                req.session.registered = true;
+                res.render("petition");
+            })
+            .catch((err) => {
+                res.render("register", {
+                    incomplete: true,
+                });
+                console.log("error in registration:", err);
+            });
+    });
+});
+
+//login
+
+app.get("/login", (req, res) => {
+    if (req.session.registered == true) {
+        res.render("login"), {};
+    } else {
+        res.render("register");
+    }
+});
+
+// app.post("/login")
+// app.post("/login", (req, res) => {
+//     let { email, pass } = req.body;
+//     compare(email, pass).then(() => {
+//         req.session.registered = true;
+//         res.render("thanks");
+//         })
+//             .catch((err) => {
+//                 res.render("register", {
+//                     incomplete: true,
+//                 });
+//                 console.log("error in registration:", err);
+//             });
+//     });
+// });
+
+// petition
+app.get("/petition", (req, res) => {
+    if (req.session.registered == true) {
+        res.render("petition");
+    } else {
+        res.redirect("register");
+    }
+});
+
+// ADJUST
 app.post("/petition", (req, res) => {
-    let { first, last, signature } = req.body;
-    db.addSignature(first, last, signature)
+    let { signature } = req.body;
+    let userId = req.session.user_id;
+    db.addSignature(signature, userId)
         .then(({ rows }) => {
-            req.session.id = rows[0].id;
-            req.session.registered = true;
+            req.session.sig = true;
+            req.session.sigid = rows[0].id;
             res.redirect("thanks");
         })
         .catch((err) => {
-            res.render("petition",{
-                incomplete: true
+            res.render("petition", {
+                incomplete: true,
             });
             console.log("posting did not work", err);
         });
 });
 
+//signers
 app.get("/signers", (req, res) => {
-    if (req.session.registered != true) {
+    if (req.session.sig != true) {
         res.redirect("/petition");
     } else {
         db.signees()
             .then(({ rows }) => {
-                res.render("signers", { 
-                    rows 
+                res.render("signers", {
+                    rows,
                 });
             })
             .catch((err) => {
@@ -83,19 +140,20 @@ app.get("/signers", (req, res) => {
     }
 });
 
+//thanks
 app.get("/thanks", (req, res) => {
-    if (!req.session.registered) {
+    if (!req.session.sig) {
         res.redirect("/petition");
     } else {
         db.registered()
             .then(({ rows }) => {
-                let numberReg = rows[0].count;
+                let numberSig = rows[0].count;
                 db.getSig(req.session.id).then(({ rows }) => {
                     let userSignature = rows[0].signature;
                     let userName = rows[0].first;
-                    res.render("thanks", { 
-                        numberReg, 
-                        userSignature, 
+                    res.render("thanks", {
+                        numberSig,
+                        userSignature,
                         userName,
                     });
                 });

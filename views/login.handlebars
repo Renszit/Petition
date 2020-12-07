@@ -1,0 +1,23 @@
+<div class="titleContainer">
+    <h1 class="title">This is the login page</h1>
+    <h3 class= "checkitout">Just to see your data, signature, who has signed and how many have signed.</h3>  
+</div>
+
+<div class="logInformContainer">
+    <form action="" method="POST" class="form">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    {{#if incomplete}}
+    <div class="error">Something went wrong there, please try again.</div>
+    {{/if}}
+    <div class="inputField">
+        <label for="email">Email</label>
+            <input type="email" name="email">
+        <label for="password">Password</label>
+            <input type="password" name="pass" required>
+    </div> 
+    <div class="buttonDiv">
+        <button type="submit" class="submit">log in!<span class="bg"></span></button>
+    </div>
+    </form>
+    <img id = "turbo" src="/ax98qPb_700b.jpg" alt="Picture of a pc with a turbo button">
+</div>

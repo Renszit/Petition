@@ -1,0 +1,27 @@
+<div class="titleContainer">
+    <h1 class="title">Start putting turbo buttons on pc's again.</h1>
+    <h3 class= "checkitout">Register below to sign the petition!</h3>  
+</div>
+
+<div class="RegformContainer">
+    <form action="" method="POST" class="form">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    {{#if incomplete}}
+    <div class="error">Something went wrong there, please try again.</div>
+    {{/if}}
+    <div class="inputField">
+        <label for="firstname">First name</label>
+            <input type="text" name="first" required>
+        <label for="lastname">Last name</label>
+            <input type="text" name="last" required>
+        <label for="email">Email</label>
+            <input type="email" name="email">
+        <label for="password">Password</label>
+            <input type="password" name="pass" required>
+    </div> 
+    <div class="buttonDiv">
+        <button type="submit" class="submit">Register!<span class="bg"></span></button>
+    </div>
+    </form>
+    <img id = "turbo" src="/ax98qPb_700b.jpg" alt="Picture of a pc with a turbo button">
+</div>
