@@ -53,21 +53,23 @@ app.get("/register", (req, res) => {
 
 app.post("/register", (req, res) => {
     const { first, last, email, pass } = req.body;
-    hash(pass).then((hash) => {
-        db.addRegister(first, last, email, hash)
-            .then(({ rows }) => {
-                req.session.userId = rows[0].id;
-                res.redirect("login");
-            })
-            .catch((err) => {
-                res.render("register", {
-                    incomplete: true,
+    hash(pass)
+        .then((hash) => {
+            db.addRegister(first, last, email, hash)
+                .then(({ rows }) => {
+                    req.session.userId = rows[0].id;
+                    res.redirect("login");
+                })
+                .catch((err) => {
+                    res.render("register", {
+                        incomplete: true,
+                    });
+                    console.log("error in registration:", err);
                 });
-                console.log("error in registration:", err);
-            });
-    }).catch((err)=> {
-        console.log("err in hash", err);
-    });
+        })
+        .catch((err) => {
+            console.log("err in hash", err);
+        });
 });
 
 //login
@@ -89,7 +91,7 @@ app.post("/login", (req, res) => {
     let { email, pass } = req.body;
     db.getHashAndEmail(email)
         .then(({ rows }) => {
-            const { password: hash, id: userId } = rows[0];
+            const { pass: hash, id: userId } = rows[0];
             compare(pass, hash).then((result) => {
                 if (result) {
                     req.session.userId = userId;
@@ -171,18 +173,22 @@ app.get("/thanks", (req, res) => {
         db.registered()
             .then(({ rows }) => {
                 const numberSig = rows[0].count;
-                db.getSig(req.session.sigId).then(({ rows }) => {
-                    let userSignature = rows[0].signature;
-                    let userName = rows[0].first;
-                    res.render("thanks", {
-                        numberSig,
-                        userSignature,
-                        userName,
+                db.getSig(req.session.sigId)
+                    .then(({ rows }) => {
+                        let userSignature = rows[0].signature;
+                        let userName = rows[0].first;
+                        res.render("thanks", {
+                            numberSig,
+                            userSignature,
+                            userName,
+                        });
+                    })
+                    .catch((err) => {
+                        console.log("error in getsig:", err);
                     });
-                });
             })
             .catch((err) => {
-                console.log("error in thanks", err);
+                console.log("error in registered", err);
             });
     }
 });

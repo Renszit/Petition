@@ -19,9 +19,9 @@ module.exports.addRegister = (first, last, email, pass) => {
 };
 
 module.exports.getHashAndEmail = (email) => {
-    const k = "SELECT password, id FROM users WHERE email = ($1)";
+    const k = "SELECT pass, id FROM users WHERE email = ($1)";
     const params = [email];
-    return db.query(k,params);
+    return db.query(k, params);
 };
 
 module.exports.registered = () => {

@@ -3,6 +3,7 @@
     box-sizing: border-box;
 }
 
+ 
 body {
     background-color: #eff7f6;
 }
@@ -145,7 +146,8 @@ label {
 .inputField {
     display: flex;
     flex-direction: column;
-    width: 50%;
+    margin-left: 30px;
+    width: 300px;
 }
 
 /* image */
@@ -164,8 +166,8 @@ label {
 .buttonDiv {
     display: flex;
     align-items: center;
+    width: 400px;
     justify-content: center;
-    height: 100%;
     background: #eff7f6;
     margin-top: 10px;
     text-decoration: none;
@@ -178,6 +180,7 @@ label {
     position: relative;
     transform: scale(1);
     padding: 10px 50px 10px 20px;
+    margin-right: 10px;
     border: none;
     background-color: #eff7f6;
     transition: all 0.3s;
@@ -271,6 +274,11 @@ label {
     display: flex;
     margin: 10px;
     width: 100%;
+}
+
+#registered {
+    margin: 10px;
+    margin-left: 30px;
 }
 
 
