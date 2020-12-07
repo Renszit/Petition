@@ -38,28 +38,26 @@ app.use((req, res, next) => {
     next();
 });
 
-//  redirect to register
-app.get("/", (req, res) => {
-    res.redirect("/register");
-});
-
 //register
 app.get("/register", (req, res) => {
-    if (req.session.registered == true) {
-        res.redirect("petition");
+    if (req.session.userId) {
+        if (req.session.sigId) {
+            res.redirect("thanks");
+        } else {
+            res.redirect("petition"), {};
+        }
     } else {
-        res.render("register"), {};
+        res.render("register");
     }
 });
 
 app.post("/register", (req, res) => {
-    let { first, last, email, pass } = req.body;
+    const { first, last, email, pass } = req.body;
     hash(pass).then((hash) => {
         db.addRegister(first, last, email, hash)
             .then(({ rows }) => {
-                req.session.user_id = rows[0].id;
-                req.session.registered = true;
-                res.render("petition");
+                req.session.userId = rows[0].id;
+                res.redirect("login");
             })
             .catch((err) => {
                 res.render("register", {
@@ -67,39 +65,66 @@ app.post("/register", (req, res) => {
                 });
                 console.log("error in registration:", err);
             });
+    }).catch((err)=> {
+        console.log("err in hash", err);
     });
 });
 
 //login
 
 app.get("/login", (req, res) => {
-    if (req.session.registered == true) {
-        res.render("login"), {};
+    if (req.session.userId) {
+        if (req.session.sigId) {
+            res.redirect("thanks"), {};
+        } else {
+            res.redirect("petition");
+        }
     } else {
-        res.render("register");
+        res.render("login");
     }
 });
 
 // app.post("/login")
-// app.post("/login", (req, res) => {
-//     let { email, pass } = req.body;
-//     compare(email, pass).then(() => {
-//         req.session.registered = true;
-//         res.render("thanks");
-//         })
-//             .catch((err) => {
-//                 res.render("register", {
-//                     incomplete: true,
-//                 });
-//                 console.log("error in registration:", err);
-//             });
-//     });
-// });
+app.post("/login", (req, res) => {
+    let { email, pass } = req.body;
+    db.getHashAndEmail(email)
+        .then(({ rows }) => {
+            const { password: hash, id: userId } = rows[0];
+            compare(pass, hash).then((result) => {
+                if (result) {
+                    req.session.userId = userId;
+                    db.signedUser(userId)
+                        .then((sigId) => {
+                            if (sigId.rows[0]) {
+                                req.session.sigId = sigId.rows[0].id;
+                                res.redirect("thanks");
+                            } else {
+                                res.redirect("petition");
+                            }
+                        })
+                        .catch((err) => {
+                            console.log("error in login", err);
+                        });
+                } else {
+                    res.render("login", {
+                        incomplete: true,
+                    });
+                }
+            });
+        })
+        .catch((err) => {
+            console.log("error in login 2", err);
+        });
+});
 
 // petition
 app.get("/petition", (req, res) => {
-    if (req.session.registered == true) {
-        res.render("petition");
+    if (req.session.userId) {
+        if (req.session.sigId) {
+            res.redirect("thanks");
+        } else {
+            res.render("petition");
+        }
     } else {
         res.redirect("register");
     }
@@ -107,12 +132,10 @@ app.get("/petition", (req, res) => {
 
 // ADJUST
 app.post("/petition", (req, res) => {
-    let { signature } = req.body;
-    let userId = req.session.user_id;
-    db.addSignature(signature, userId)
+    const { signature } = req.body;
+    db.addSignature(signature, req.session.userId)
         .then(({ rows }) => {
-            req.session.sig = true;
-            req.session.sigid = rows[0].id;
+            req.session.sigId = rows[0].id;
             res.redirect("thanks");
         })
         .catch((err) => {
@@ -125,7 +148,7 @@ app.post("/petition", (req, res) => {
 
 //signers
 app.get("/signers", (req, res) => {
-    if (req.session.sig != true) {
+    if (!req.session.sigId) {
         res.redirect("/petition");
     } else {
         db.signees()
@@ -142,13 +165,13 @@ app.get("/signers", (req, res) => {
 
 //thanks
 app.get("/thanks", (req, res) => {
-    if (!req.session.sig) {
+    if (!req.session.sigId) {
         res.redirect("/petition");
     } else {
         db.registered()
             .then(({ rows }) => {
-                let numberSig = rows[0].count;
-                db.getSig(req.session.id).then(({ rows }) => {
+                const numberSig = rows[0].count;
+                db.getSig(req.session.sigId).then(({ rows }) => {
                     let userSignature = rows[0].signature;
                     let userName = rows[0].first;
                     res.render("thanks", {
@@ -162,6 +185,10 @@ app.get("/thanks", (req, res) => {
                 console.log("error in thanks", err);
             });
     }
+});
+
+app.get("*", (req, res) => {
+    res.redirect("/register");
 });
 
 app.listen(8080, () => console.log("I am listening sire"));

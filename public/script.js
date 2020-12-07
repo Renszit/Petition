@@ -1,7 +1,7 @@
 (function () {
     const canvas = $("#canvas");
     const signature = $("#signature");
-    let ctx = canvas[0].getContext("2d");
+    var ctx = canvas[0].getContext("2d");
     let xAxis = canvas.offset().left;
     let yAxis = canvas.offset().top;
 

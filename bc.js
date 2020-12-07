@@ -5,9 +5,9 @@ const genSalt = promisify(bcrypt.genSalt);
 const hash = promisify(bcrypt.hash);
 const compare = promisify(bcrypt.compare);
 
-exports.hash = (pass) => {
+exports.hash = (plainTxtPwd) => {
     return genSalt().then((salt) => {
-        return hash(pass, salt);
+        return hash(plainTxtPwd, salt);
     });
 };
 
