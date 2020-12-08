@@ -1,5 +1,6 @@
-<div class="titleContainer">
-<h1 class="title">these people also want to have a turbo time</h1>
+<div id="signerTitle" class="titleContainer">
+<h1 class="title">Without these people man, I don't know what would come of the world.</h1>
+<h3 class= "checkitout">Now, go watch a <a target="_blank" href='https://www.youtube.com/watch?v=p2q02Bxtqds&ab_channel=LGR'>little movie</a> about turbo buttons or check out the websites of these wonderful people by clicking on their names!</h3>  
 </div>
 
 <div class="nameList">
@@ -9,13 +10,18 @@
     {{else}}
     {{this.first}} {{this.last}} 
     {{/if}}
-    {{this.age}}
+    {{this.age}} 
     {{#if this.city}} 
         <a href="/petition/signers/{{this.city}}">{{this.city}}</a>
     {{/if}}
     </p>
 {{/rows}}
-
 </div>
+<a class="thanksButtonDiv" href="/thanks">
+    <button  class="submit">Go back to your amazing signature.
+    <span class="bg"></span>
+    </button>
+</a>
+
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

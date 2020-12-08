@@ -1,8 +1,8 @@
 <div class="titleContainer">
-    <h1 class="title">This is the login page</h1>
-    <h3 class= "checkitout">Just to see your data, signature, who has signed and how many have signed.</h3>  
+    <h1 class="title">This is the login page, welcome back!</h1>
+    <h3 class= "checkitout">Sign in below to see who backs us and find your own signature!</h3>  
 </div>
-<div class="logInformContainer">
+<div class="RegformContainer">
     <form action="" method="POST" class="form">
     <input type="hidden" name="_csrf" value="{{csrfToken}}">
     {{#if incomplete}}
@@ -15,10 +15,12 @@
             <input type="password" name="pass" required>
     </div> 
     <div class="buttonDiv">
-        <button type="submit" class="submit">log in!<span class="bg"></span></button>
+        <button type="reset" class="submit">Reset form<span class="bg"></span></button>
+        <button type="submit" class="submit">Log in<span class="bg"></span></button>
     </div>
+    <p id="registered">Not registered? <a href="register">Go to registration</a></p>
     </form>
-    <img id = "turbo" src="/ax98qPb_700b.jpg" alt="Picture of a pc with a turbo button">
+    <img id = "turbo" src="/turbo.jpg" alt="Picture of a pc with a turbo button">
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

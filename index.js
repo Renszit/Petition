@@ -58,7 +58,8 @@ app.post("/register", (req, res) => {
             db.addRegister(first, last, email, hash)
                 .then(({ rows }) => {
                     req.session.userId = rows[0].id;
-                    res.redirect("profile");
+                    res.redirect("profile", {
+                    });
                 })
                 .catch((err) => {
                     res.render("register", {

@@ -7,6 +7,11 @@ body {
     background-color: #eff7f6;
 }
 
+a {
+    color: #f7d6e0;
+    text-decoration: dotted underline;
+}
+
 footer {
     position: fixed;
     bottom: 0px;
@@ -20,11 +25,13 @@ footer {
     display: flex;
     flex-direction: column;
     margin: 10px;
+    align-items: center;
+    text-align: center;
 }
 
 .title {
     font-family: Lato;
-    width: 50%;
+    width: 80%;
     font-size: 60px;
     margin: 10px;
     animation: text-shadow 1.5s ease-in-out;
@@ -111,16 +118,7 @@ footer {
     margin-top: 0;
 }
 
-.formContainer {
-    font-family: "Lato";
-    display: flex;
-    margin: 10px;
-    width: 100%;
-}
-
 .form {
-    width: 600px;
-    height: 270px;
     margin: 10px;
 }
 
@@ -151,13 +149,10 @@ label {
 
 /* image */
 #turbo {
-    display: flex;
-    margin: 10px;
-    margin-top: 20px;
-    height: 40%;
-    width: 40%;
+    margin-left: 23px;
+    height: 320px;
     object-fit: cover;
-    border: inset 5px #e29578;
+    border: solid 2px #e29578;
 }
 
 /* submit button */
@@ -247,8 +242,10 @@ label {
     display: flex;
     flex-direction: column;
     font-family: "Lato";
-    color: #f7d6e0;
+    color: #e29578;
     text-align: center;
+    font-size: 20px;
+    margin: 30px;
 }
 
 /* thanks handlebars */
@@ -257,6 +254,20 @@ label {
     display: flex;
     justify-content: center;
     align-content: center;
+    margin: 10px;
+}
+
+#sig {
+    border: 1px dashed #e29578;
+}
+
+.thanksButtonDiv {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: #eff7f6;
+    margin-top: 10px;
+    text-decoration: none;
 }
 
 /* register handlebars */
@@ -264,44 +275,12 @@ label {
 .RegformContainer {
     font-family: "Lato";
     display: flex;
-    margin: 10px;
-    width: 100%;
+    margin-top: 20px;
+    align-content: center;
+    justify-content: center;
 }
 
 #registered {
     margin: 10px;
     margin-left: 30px;
-}
-
-/* login */
-
-.logInformContainer {
-    font-family: "Lato";
-    display: flex;
-    margin: 10px;
-    width: 100%;
-}
-
-/* profile page */
-
-.ProfFormContainer {
-    font-family: "Lato";
-    display: flex;
-    margin: 10px;
-    width: 100%;
-}
-
-/* trello */
-@media screen and (min-width: 400px) and (max-width: 800px) {
-    .formContainer {
-        flex-direction: column;
-    }
-
-    .title {
-        width: 80%;
-    }
-
-    #turbo {
-        width: 80%;
-    }
 }
