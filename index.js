@@ -58,7 +58,7 @@ app.post("/register", (req, res) => {
             db.addRegister(first, last, email, hash)
                 .then(({ rows }) => {
                     req.session.userId = rows[0].id;
-                    res.redirect("profile", {
+                    res.render("profile", {
                     });
                 })
                 .catch((err) => {
@@ -220,11 +220,11 @@ app.get("/thanks", (req, res) => {
                 db.getSig(req.session.sigId)
                     .then(({ rows }) => {
                         let userSignature = rows[0].signature;
-                        let userName = rows[0].first;
+                        // let userName = rows[0].first;
                         res.render("thanks", {
                             numberSig,
                             userSignature,
-                            userName,
+                            // userName,
                         });
                     })
                     .catch((err) => {

@@ -12,6 +12,12 @@ a {
     text-decoration: dotted underline;
 }
 
+a:hover {
+    color: #e29578;
+    transition: ease;
+    text-decoration: none;
+}
+
 footer {
     position: fixed;
     bottom: 0px;
