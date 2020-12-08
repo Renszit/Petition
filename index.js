@@ -58,7 +58,7 @@ app.post("/register", (req, res) => {
             db.addRegister(first, last, email, hash)
                 .then(({ rows }) => {
                     req.session.userId = rows[0].id;
-                    res.redirect("login");
+                    res.redirect("profile");
                 })
                 .catch((err) => {
                     res.render("register", {
@@ -72,8 +72,38 @@ app.post("/register", (req, res) => {
         });
 });
 
-//login
+//profile
 
+app.get("/profile", (req, res) => {
+    if (req.session.userId) {
+        if (!req.session.profileId) {
+            res.render("profile");
+        } else {
+            res.redirect("petition");
+        }
+    } else {
+        res.redirect("login");
+    }
+});
+
+app.post("/profile", (req, res) => {
+    let { age, city, homepage } = req.body;
+    db.profileData(age, city, homepage, req.session.userId)
+        .then(({ rows }) => {
+            req.session.profileId = rows[0].id;
+            if (req.session.sigId) {
+                res.redirect("thanks");
+            } else {
+                res.redirect("petition");
+            }
+        })
+        .catch((err) => {
+            console.log("error in posting profile", err);
+            res.render("profile", {});
+        });
+});
+
+//login
 app.get("/login", (req, res) => {
     if (req.session.userId) {
         if (req.session.sigId) {
@@ -132,7 +162,6 @@ app.get("/petition", (req, res) => {
     }
 });
 
-// ADJUST
 app.post("/petition", (req, res) => {
     const { signature } = req.body;
     db.addSignature(signature, req.session.userId)

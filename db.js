@@ -42,3 +42,11 @@ module.exports.signedUser = (userId) => {
     const params = [userId];
     return db.query(q,params);
 };
+
+module.exports.profileData = (age, city, url, user_Id) => {
+    const q = `INSERT INTO user_profiles (age, city, url, user_Id) 
+    VALUES ($1,$2,$3,$4) 
+    RETURNING id`;
+    const params = [age || null, city || null, url ||null , user_Id];
+    return db.query(q,params);
+};

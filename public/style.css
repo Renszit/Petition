@@ -3,7 +3,6 @@
     box-sizing: border-box;
 }
 
- 
 body {
     background-color: #eff7f6;
 }
@@ -269,6 +268,13 @@ label {
     width: 100%;
 }
 
+#registered {
+    margin: 10px;
+    margin-left: 30px;
+}
+
+/* login */
+
 .logInformContainer {
     font-family: "Lato";
     display: flex;
@@ -276,16 +282,19 @@ label {
     width: 100%;
 }
 
-#registered {
+/* profile page */
+
+.ProfFormContainer {
+    font-family: "Lato";
+    display: flex;
     margin: 10px;
-    margin-left: 30px;
+    width: 100%;
 }
 
-
 /* trello */
-@media screen and (min-width:400px) and (max-width:800px){
-  .formContainer { 
-      flex-direction: column;
+@media screen and (min-width: 400px) and (max-width: 800px) {
+    .formContainer {
+        flex-direction: column;
     }
 
     .title {
