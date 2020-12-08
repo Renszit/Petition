@@ -4,8 +4,18 @@
 
 <div class="nameList">
 {{#rows}}
-<p>{{this.first}} {{this.last}}</p>
+<p> {{#if this.url}}
+    <a href="{{this.url}}">{{this.first}} {{this.last}}</a>
+    {{else}}
+    {{this.first}} {{this.last}} 
+    {{/if}}
+    {{this.age}}
+    {{#if this.city}} 
+        <a href="/petition/signers/{{this.city}}">{{this.city}}</a>
+    {{/if}}
+    </p>
 {{/rows}}
+
 </div>
 
 <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>

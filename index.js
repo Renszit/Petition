@@ -194,6 +194,20 @@ app.get("/signers", (req, res) => {
     }
 });
 
+app.get("/petition/signers/*", (req, res) => {
+    const city = req.url.replace("/petition/signers/", "");
+    db.citySigned(city.replace("%20", " "))
+        .then(({ rows }) => {
+            res.render("signers", {
+                rows,
+            });
+        })
+        .catch((err) => {
+            console.log("citySigned error: ", err);
+            res.redirect("signers");
+        });
+});
+
 //thanks
 app.get("/thanks", (req, res) => {
     if (!req.session.sigId) {
