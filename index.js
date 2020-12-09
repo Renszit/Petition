@@ -58,8 +58,7 @@ app.post("/register", (req, res) => {
             db.addRegister(first, last, email, hash)
                 .then(({ rows }) => {
                     req.session.userId = rows[0].id;
-                    res.render("profile", {
-                    });
+                    res.redirect("profile");
                 })
                 .catch((err) => {
                     res.render("register", {
@@ -89,9 +88,9 @@ app.get("/profile", (req, res) => {
 
 app.post("/profile", (req, res) => {
     let { age, city, homepage } = req.body;
+    // if (!homepage || url.indexOf("http://"))
     db.profileData(age, city, homepage, req.session.userId)
-        .then(({ rows }) => {
-            req.session.profileId = rows[0].id;
+        .then(() => {
             if (req.session.sigId) {
                 res.redirect("thanks");
             } else {
