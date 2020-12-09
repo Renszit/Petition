@@ -1,0 +1,31 @@
+<div class="titleContainer">
+    <h1 class="title">Edit, add or remove your data here</h1>
+    <h3 class= "checkitout">you can even change your password, wowsers!</h3>  
+</div>
+<div class="RegformContainer">
+    <form action="" method="POST" class="form">
+    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+    <div class="inputField">
+        {{#rows}}
+        <label for="first">First Name</label>
+            <input type="text" name="first" value={{this.first}}>
+        <label for="last" >Last Name</label>
+            <input type="text" name="last" value={{this.last}}>
+        <label for="email">Email</label>
+            <input type="email" name="email" value={{this.email}}>
+        <label for="password">Password</label>
+            <input type="password" name="pass">
+        <label for="age">Age</label>
+            <input type="text" name="age" value={{this.age}}>
+        <label for="city">City</label>
+            <input type="text" name="city" value= {{this.city}}>
+        <label for="homepage">Homepage</label>
+            <input type="text" name="homepage" value= {{this.homepage}}>
+        {{/rows}}
+    </div> 
+    <div class="buttonDiv">
+        <button type="submit" class="submit">Update<span class="bg"></span></button>
+    </div>
+    <p class="registered">Or go back to the <a href="thanks">thank you page</a></p>
+    </form>
+</div>

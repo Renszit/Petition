@@ -1,5 +1,7 @@
 var spicedPg = require("spiced-pg");
-var db = spicedPg(process.env.DATABASE_URL || "postgres:rens:petition@localhost:5432/petition");
+var db = spicedPg(
+    process.env.DATABASE_URL || "postgres:rens:petition@localhost:5432/petition"
+);
 
 module.exports.addSignature = (signature, userId) => {
     const q = `INSERT INTO petition (signature, user_id) 
@@ -73,4 +75,41 @@ module.exports.profileData = (age, city, url, user_Id) => {
     RETURNING id`;
     const params = [age || null, city || null, url || null, user_Id];
     return db.query(q, params);
+};
+
+module.exports.getProfileInfo = (userId) => {
+    const q = `SELECT users.first, users.last, users.email, user_profiles.age, user_profiles.city, user_profiles.url
+    FROM users
+    JOIN user_profiles
+    ON users.id = user_profiles.user_id
+    WHERE users.id = ($1)`;
+    const para = [userId];
+    return db.query(q, para);
+};
+
+module.exports.updatePW = (first, last, email, pass, userId) => {
+    const q = `UPDATE users SET first = ($1), last= ($2), email=($3), pass=($4) WHERE id=($5)`;
+    const param = [first, last, email, pass, userId];
+    return db.query(q, param);
+};
+
+module.exports.updateNoPw = (first, last, email, userId) => {
+    const q = `UPDATE users SET first = ($1), last=($2), email=($3) WHERE id=($4)`;
+    const param = [first, last, email, userId];
+    return db.query(q, param);
+};
+
+// INSERT INTO actors(name, age, oscars)
+// VALUES ('Ingrid Bergman', 67, 4)
+// ON CONFLICT (name)
+// DO UPDATE SET age = 67, oscars=4;
+
+module.exports.updateProfile = (age, city, url, userId) => {
+    const q = `INSERT INTO user_profiles(age,city,url,user_id)
+    VALUES ($1,$2,$3,$4)
+    ON CONFLICT (user_id)
+    DO UPDATE SET age=($1), city=($2), url=($3), user_id=($4)`;
+
+    const param = [age || null, city || null, url || null, userId];
+    return db.query(q, param);
 };

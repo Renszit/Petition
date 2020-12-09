@@ -269,6 +269,7 @@ label {
 
 .thanksButtonDiv {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
     background: #eff7f6;
@@ -286,7 +287,9 @@ label {
     justify-content: center;
 }
 
-#registered {
+.registered {
     margin: 10px;
     margin-left: 30px;
+    font-family: "Lato";
+    font-size: 14px;
 }

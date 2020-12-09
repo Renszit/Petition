@@ -236,9 +236,60 @@ app.get("/thanks", (req, res) => {
     }
 });
 
+app.get("/edit", (req, res) => {
+    const userId = req.session.userId;
+    if (userId) {
+        db.getProfileInfo(userId)
+            .then(({ rows }) => {
+                res.render("edit", {
+                    rows,
+                });
+            })
+            .catch((err) => console.log("error in getforedit", err));
+    } else {
+        res.redirect("login");
+    }
+});
+
+app.post("/edit", (req, res) => {
+    const { first, last, pass, email, age, city, url } = req.body;
+    const userId = req.session.userId;
+    if (pass) {
+        hash(pass)
+            .then((hash) => {
+                db.updatePW(first, last, email, hash, userId);
+            })
+            .then(() => {
+                db.updateProfile(age, city, url,userId)
+                    .then(() => {
+                        res.redirect("thanks");
+                    })
+                    .catch((err) => {
+                        console.log("error in updateprofile", err);
+                    });
+            })
+            .catch((err) => {
+                console.log("err in hash", err);
+            });
+    } else {
+        db.updateNoPw(first, last, email, userId)
+            .then(() => {
+                db.updateProfile(age, city, url, userId)
+                    .then(() => {
+                        res.redirect("thanks");
+                    })
+                    .catch((err) => {
+                        console.log("error in updateprofile no pw", err);
+                    });
+            })
+            .catch((err) => {
+                console.log("err in update no pw", err);
+            });
+    }
+});
+
 app.get("*", (req, res) => {
     res.redirect("/register");
 });
-
 
 app.listen(process.env.PORT || 8080, () => console.log("Server listening.."));
