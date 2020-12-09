@@ -240,4 +240,5 @@ app.get("*", (req, res) => {
     res.redirect("/register");
 });
 
-app.listen(8080, () => console.log("I am listening sire"));
+
+app.listen(process.env.PORT || 8080, () => console.log("Server listening.."));
