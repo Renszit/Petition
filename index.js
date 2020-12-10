@@ -12,6 +12,8 @@ app.engine("handlebars", hb());
 
 app.set("view engine", "handlebars");
 
+exports.app = app;
+
 app.use((req, res, next) => {
     console.log("----------------");
     console.log(`${req.method} request comin on route: ${req.url}`);
@@ -279,8 +281,17 @@ app.post("/edit", (req, res) => {
     }
 });
 
+app.get("/logout", (req,res)=> {
+    req.session = null;
+    res.redirect("login");
+});
+
 app.get("*", (req, res) => {
     res.redirect("/register");
 });
 
-app.listen(process.env.PORT || 8080, () => console.log("Server listening.."));
+if (require.main == module) {
+    app.listen(process.env.PORT || 8080, () =>
+        console.log("Server listening..")
+    );
+}

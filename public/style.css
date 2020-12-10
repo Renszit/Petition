@@ -21,7 +21,7 @@ a:hover {
 footer {
     position: fixed;
     bottom: 0px;
-    font-family: Lato;
+    font-family: "Lato";
     margin: 10px;
     font-size: 10px;
     color: #75485e;
@@ -43,10 +43,6 @@ footer {
     animation: text-shadow 1.5s ease-in-out;
     font-weight: 900;
 }
-
-/* .title:hover {
-    animation: text-shadow2 2s infinite;
-} */
 
 @keyframes text-shadow {
     0% {
@@ -77,36 +73,6 @@ footer {
         text-shadow: 0 0 0 #0c2ffb, 0 0 0 #2cfcfd, 0 0 0 #fb203b, 0 0 0 #fefc4b;
     }
 }
-/* 
-@keyframes text-shadow2 {
-    0% {
-        transform: translateY(0);
-        text-shadow: 0 0 0 #0c2ffb, 0 0 0 #2cfcfd, 0 0 0 #fb203b, 0 0 0 #fefc4b;
-    }
-
-    20% {
-        transform: translateY(-1em);
-        text-shadow: 0 0.125em 0 #0c2ffb, 0 0.25em 0 #2cfcfd,
-            0 -0.125em 0 #fb203b, 0 -0.25em 0 #fefc4b;
-    }
-
-    40% {
-        transform: translateY(0.5em);
-        text-shadow: 0 -0.0625em 0 #0c2ffb, 0 -0.125em 0 #2cfcfd,
-            0 0.0625em 0 #fb203b, 0 0.125em 0 #fefc4b;
-    }
-
-    60% {
-        transform: translateY(-0.25em);
-        text-shadow: 0 0.03125em 0 #0c2ffb, 0 0.0625em 0 #2cfcfd,
-            0 -0.03125em 0 #fb203b, 0 -0.0625em 0 #fefc4b;
-    }
-
-    80% {
-        transform: translateY(0);
-        text-shadow: 0 0 0 #0c2ffb, 0 0 0 #2cfcfd, 0 0 0 #fb203b, 0 0 0 #fefc4b;
-    }
-} */
 
 /* petition handlebars */
 
@@ -114,6 +80,7 @@ footer {
     font-family: Lato;
     color: #e29578;
     margin: 10px;
+    text-align: center;
 }
 
 .checkitout {
@@ -149,8 +116,8 @@ label {
 .inputField {
     display: flex;
     flex-direction: column;
-    margin-left: 30px;
-    width: 300px;
+    margin: 30px;
+    /* width: 300px; */
 }
 
 /* image */
@@ -267,6 +234,13 @@ label {
     border: 1px dashed #e29578;
 }
 
+#thanksEdit {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    font-size: 20px;
+}
+
 .thanksButtonDiv {
     display: flex;
     flex-direction: column;
@@ -289,7 +263,33 @@ label {
 
 .registered {
     margin: 10px;
-    margin-left: 30px;
     font-family: "Lato";
+    text-align: center;
     font-size: 14px;
+}
+
+/* logout */
+
+#logout {
+    font-family: "Lato";
+    width: 90px;
+    height: 40px;
+    background-color: #e29578;
+    color: #eff7f6;
+    border: 2px #e29578 solid;
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    transition: 0.3s ease;
+}
+
+#logout:hover {
+    background-color: #eff7f6;
+    color: #e29578;
+    border-top: dashed 2px #e29578;
+    border-left: dashed 2px #e29578;
+    border-right: none;
+    border-bottom: none;
+    width: 180px;
+    height: 80px;
 }
