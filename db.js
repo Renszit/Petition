@@ -1,7 +1,5 @@
 var spicedPg = require("spiced-pg");
-var db = spicedPg(
-    process.env.DATABASE_URL || "postgres:rens:petition@localhost:5432/petition"
-);
+var db = spicedPg(process.env.DATABASE_URL || "postgres:rens:petition@localhost:5432/petition");
 
 module.exports.addSignature = (signature, userId) => {
     const q = `INSERT INTO petition (signature, user_id) 

@@ -36,7 +36,7 @@ footer {
 }
 
 .title {
-    font-family: Lato;
+    font-family: "Lato";
     width: 80%;
     font-size: 60px;
     margin: 10px;
@@ -77,14 +77,14 @@ footer {
 /* petition handlebars */
 
 .error {
-    font-family: Lato;
+    font-family: "Lato";
     color: #e29578;
     margin: 10px;
     text-align: center;
 }
 
 .checkitout {
-    font-family: Lato;
+    font-family: "Lato";
     color: #f7d6e0;
     font-size: 35px;
     margin: 10px;
@@ -116,8 +116,8 @@ label {
 .inputField {
     display: flex;
     flex-direction: column;
-    margin: 30px;
-    /* width: 300px; */
+    margin: 20px;
+    width: 300px;
 }
 
 /* image */
