@@ -88,7 +88,9 @@ app.get("/profile", (req, res) => {
 
 app.post("/profile", (req, res) => {
     let { age, city, homepage } = req.body;
-    // if (!homepage || url.indexOf("http://"))
+    if (!homepage.startsWith("http") || !homepage.startsWith("https")) {
+        homepage = null;
+    }
     db.profileData(age, city, homepage, req.session.userId)
         .then(() => {
             if (req.session.sigId) {
@@ -260,7 +262,7 @@ app.post("/edit", (req, res) => {
                 db.updatePW(first, last, email, hash, userId);
             })
             .then(() => {
-                db.updateProfile(age, city, url,userId)
+                db.updateProfile(age, city, url, userId)
                     .then(() => {
                         res.redirect("thanks");
                     })
