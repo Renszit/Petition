@@ -7,7 +7,9 @@ const cookieSession = require("cookie-session");
 const { hash, compare } = require("./bc");
 
 app.use(express.static("./public"));
+
 app.engine("handlebars", hb());
+
 app.set("view engine", "handlebars");
 
 app.use((req, res, next) => {
@@ -88,9 +90,6 @@ app.get("/profile", (req, res) => {
 
 app.post("/profile", (req, res) => {
     let { age, city, homepage } = req.body;
-    if (!homepage.startsWith("http") || !homepage.startsWith("https")) {
-        homepage = null;
-    }
     db.profileData(age, city, homepage, req.session.userId)
         .then(() => {
             if (req.session.sigId) {
@@ -254,15 +253,18 @@ app.get("/edit", (req, res) => {
 });
 
 app.post("/edit", (req, res) => {
-    const { first, last, pass, email, age, city, url } = req.body;
+    let { first, last, pass, email, age, city, homepage } = req.body;
     const userId = req.session.userId;
+    // if (!homepage.startsWith("http") || !homepage.startsWith("https")) {
+    //     homepage = null;
+    // }
     if (pass) {
         hash(pass)
             .then((hash) => {
                 db.updatePW(first, last, email, hash, userId);
             })
             .then(() => {
-                db.updateProfile(age, city, url, userId)
+                db.updateProfile(age, city, homepage, userId)
                     .then(() => {
                         res.redirect("thanks");
                     })
@@ -276,7 +278,7 @@ app.post("/edit", (req, res) => {
     } else {
         db.updateNoPw(first, last, email, userId)
             .then(() => {
-                db.updateProfile(age, city, url, userId)
+                db.updateProfile(age, city, homepage, userId)
                     .then(() => {
                         res.redirect("thanks");
                     })
