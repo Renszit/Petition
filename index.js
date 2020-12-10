@@ -40,7 +40,6 @@ app.use((req, res, next) => {
     next();
 });
 
-//register
 app.get("/register", (req, res) => {
     if (req.session.userId) {
         if (req.session.sigId) {
@@ -74,8 +73,6 @@ app.post("/register", (req, res) => {
         });
 });
 
-//profile
-
 app.get("/profile", (req, res) => {
     if (req.session.userId) {
         if (!req.session.profileId) {
@@ -104,7 +101,6 @@ app.post("/profile", (req, res) => {
         });
 });
 
-//login
 app.get("/login", (req, res) => {
     if (req.session.userId) {
         if (req.session.sigId) {
@@ -117,7 +113,6 @@ app.get("/login", (req, res) => {
     }
 });
 
-// app.post("/login")
 app.post("/login", (req, res) => {
     let { email, pass } = req.body;
     db.getHashAndEmail(email)
@@ -150,7 +145,6 @@ app.post("/login", (req, res) => {
         });
 });
 
-// petition
 app.get("/petition", (req, res) => {
     if (req.session.userId) {
         if (req.session.sigId) {
@@ -178,7 +172,6 @@ app.post("/petition", (req, res) => {
         });
 });
 
-//signers
 app.get("/signers", (req, res) => {
     if (!req.session.sigId) {
         res.redirect("/petition");
@@ -209,7 +202,6 @@ app.get("/petition/signers/*", (req, res) => {
         });
 });
 
-//thanks
 app.get("/thanks", (req, res) => {
     if (!req.session.sigId) {
         res.redirect("/petition");
@@ -220,11 +212,9 @@ app.get("/thanks", (req, res) => {
                 db.getSig(req.session.sigId)
                     .then(({ rows }) => {
                         let userSignature = rows[0].signature;
-                        // let userName = rows[0].first;
                         res.render("thanks", {
                             numberSig,
                             userSignature,
-                            // userName,
                         });
                     })
                     .catch((err) => {
@@ -255,9 +245,6 @@ app.get("/edit", (req, res) => {
 app.post("/edit", (req, res) => {
     let { first, last, pass, email, age, city, homepage } = req.body;
     const userId = req.session.userId;
-    // if (!homepage.startsWith("http") || !homepage.startsWith("https")) {
-    //     homepage = null;
-    // }
     if (pass) {
         hash(pass)
             .then((hash) => {
