@@ -12,6 +12,12 @@ app.engine("handlebars", hb());
 
 app.set("view engine", "handlebars");
 
+const {
+    requireLoggedOutUser,
+    requireSignedPetition,
+    requireLoggedInUser,
+} = require("./middleware");
+
 exports.app = app;
 
 app.use((req, res, next) => {
@@ -42,16 +48,8 @@ app.use((req, res, next) => {
     next();
 });
 
-app.get("/register", (req, res) => {
-    if (req.session.userId) {
-        if (req.session.sigId) {
-            res.redirect("thanks");
-        } else {
-            res.redirect("petition"), {};
-        }
-    } else {
-        res.render("register");
-    }
+app.get("/register", requireLoggedOutUser, (req, res) => {
+    res.render("register");
 });
 
 app.post("/register", (req, res) => {
@@ -75,44 +73,8 @@ app.post("/register", (req, res) => {
         });
 });
 
-app.get("/profile", (req, res) => {
-    if (req.session.userId) {
-        if (!req.session.profileId) {
-            res.render("profile");
-        } else {
-            res.redirect("petition");
-        }
-    } else {
-        res.redirect("login");
-    }
-});
-
-app.post("/profile", (req, res) => {
-    let { age, city, homepage } = req.body;
-    db.profileData(age, city, homepage, req.session.userId)
-        .then(() => {
-            if (req.session.sigId) {
-                res.redirect("thanks");
-            } else {
-                res.redirect("petition");
-            }
-        })
-        .catch((err) => {
-            console.log("error in posting profile", err);
-            res.render("profile", {});
-        });
-});
-
-app.get("/login", (req, res) => {
-    if (req.session.userId) {
-        if (req.session.sigId) {
-            res.redirect("thanks"), {};
-        } else {
-            res.redirect("petition");
-        }
-    } else {
-        res.render("login");
-    }
+app.get("/login", requireLoggedOutUser, (req, res) => {
+    res.render("login");
 });
 
 app.post("/login", (req, res) => {
@@ -147,15 +109,31 @@ app.post("/login", (req, res) => {
         });
 });
 
-app.get("/petition", (req, res) => {
-    if (req.session.userId) {
-        if (req.session.sigId) {
-            res.redirect("thanks");
-        } else {
-            res.render("petition");
-        }
+app.get("/profile", requireLoggedInUser, (req, res) => {
+    res.render("profile");
+});
+
+app.post("/profile", (req, res) => {
+    let { age, city, homepage } = req.body;
+    db.profileData(age, city, homepage, req.session.userId)
+        .then(() => {
+            if (req.session.sigId) {
+                res.redirect("thanks");
+            } else {
+                res.redirect("petition");
+            }
+        })
+        .catch((err) => {
+            console.log("error in posting profile", err);
+            res.render("profile", {});
+        });
+});
+
+app.get("/petition", requireLoggedInUser, (req, res) => {
+    if (req.session.sigId) {
+        res.redirect("thanks");
     } else {
-        res.redirect("register");
+        res.render("petition");
     }
 });
 
@@ -174,20 +152,16 @@ app.post("/petition", (req, res) => {
         });
 });
 
-app.get("/signers", (req, res) => {
-    if (!req.session.sigId) {
-        res.redirect("/petition");
-    } else {
-        db.signees()
-            .then(({ rows }) => {
-                res.render("signers", {
-                    rows,
-                });
-            })
-            .catch((err) => {
-                console.log("error in signers", err);
+app.get("/signers", requireSignedPetition, (req, res) => {
+    db.signees()
+        .then(({ rows }) => {
+            res.render("signers", {
+                rows,
             });
-    }
+        })
+        .catch((err) => {
+            console.log("error in signers", err);
+        });
 });
 
 app.get("/petition/signers/*", (req, res) => {
@@ -204,44 +178,36 @@ app.get("/petition/signers/*", (req, res) => {
         });
 });
 
-app.get("/thanks", (req, res) => {
-    if (!req.session.sigId) {
-        res.redirect("/petition");
-    } else {
-        db.registered()
-            .then(({ rows }) => {
-                const numberSig = rows[0].count;
-                db.getSig(req.session.sigId)
-                    .then(({ rows }) => {
-                        let userSignature = rows[0].signature;
-                        res.render("thanks", {
-                            numberSig,
-                            userSignature,
-                        });
-                    })
-                    .catch((err) => {
-                        console.log("error in getsig:", err);
+app.get("/thanks", requireLoggedInUser, requireSignedPetition, (req, res) => {
+    db.registered()
+        .then(({ rows }) => {
+            const numberSig = rows[0].count;
+            db.getSig(req.session.sigId)
+                .then(({ rows }) => {
+                    let userSignature = rows[0].signature;
+                    res.render("thanks", {
+                        numberSig,
+                        userSignature,
                     });
-            })
-            .catch((err) => {
-                console.log("error in registered", err);
-            });
-    }
+                })
+                .catch((err) => {
+                    console.log("error in getsig:", err);
+                });
+        })
+        .catch((err) => {
+            console.log("error in registered", err);
+        });
 });
 
-app.get("/edit", (req, res) => {
+app.get("/edit", requireLoggedInUser, (req, res) => {
     const userId = req.session.userId;
-    if (userId) {
-        db.getProfileInfo(userId)
-            .then(({ rows }) => {
-                res.render("edit", {
-                    rows,
-                });
-            })
-            .catch((err) => console.log("error in getforedit", err));
-    } else {
-        res.redirect("login");
-    }
+    db.getProfileInfo(userId)
+        .then(({ rows }) => {
+            res.render("edit", {
+                rows,
+            });
+        })
+        .catch((err) => console.log("error in getforedit", err));
 });
 
 app.post("/edit", (req, res) => {
@@ -281,7 +247,7 @@ app.post("/edit", (req, res) => {
     }
 });
 
-app.get("/logout", (req,res)=> {
+app.get("/logout", (req, res) => {
     req.session = null;
     res.redirect("login");
 });

@@ -68,4 +68,3 @@ test("Users who are logged in and have not signed the petition are redirected to
             expect(response.headers.location).toBe("/petition");
         });
 });
-
