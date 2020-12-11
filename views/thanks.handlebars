@@ -3,6 +3,10 @@
 </div>
 <div class="sigContainer">
 <img id="sig" src="{{ userSignature }}" alt="your signature">
+<form action="" method="POST" class="form">
+ <input type="hidden" name="_csrf" value="{{csrfToken}}">
+<button id="removeSig">remove signature</button>
+</form>
 </div>
 <a class="thanksButtonDiv" href="/signers">
     <button  class="submit">Check out the {{numberSig}} people who have signed!

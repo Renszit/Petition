@@ -199,6 +199,13 @@ app.get("/thanks", requireLoggedInUser, requireSignedPetition, (req, res) => {
         });
 });
 
+app.post("/thanks", requireLoggedInUser, (req, res) => {
+    db.deleteSig(req.session.userId).then(() => {
+        req.session.sigId = false;
+        res.redirect("petition");
+    }).catch((err) => console.log("error in removing signature", err));
+});
+
 app.get("/edit", requireLoggedInUser, (req, res) => {
     const userId = req.session.userId;
     db.getProfileInfo(userId)

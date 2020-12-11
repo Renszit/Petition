@@ -293,3 +293,16 @@ label {
     width: 180px;
     height: 80px;
 }
+
+#removeSig {
+    font-family: "Lato";
+    width: 150px;
+    height: 20px;
+    background-color: #e29578;
+    color: #eff7f6;
+    border: 2px #e29578 solid;
+    position: fixed;
+    top: 0;
+    right: 0;
+    transition: 0.3s ease;
+}

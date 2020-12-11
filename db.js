@@ -113,3 +113,9 @@ module.exports.updateProfile = (age, city, url, userId) => {
     const param = [age || null, city || null, url || null, userId];
     return db.query(q, param);
 };
+
+module.exports.deleteSig = (sigId) => {
+    const q = `DELETE FROM petition WHERE id = ($1)`;
+    const param = [sigId];
+    return db.query(q, param);
+};
