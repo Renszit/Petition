@@ -116,7 +116,7 @@ app.get("/login", (req, res) => {
 });
 
 app.post("/login", (req, res) => {
-    let { email, pass } = req.body;
+    const { email, pass } = req.body;
     db.getHashAndEmail(email)
         .then(({ rows }) => {
             const { pass: hash, id: userId } = rows[0];
