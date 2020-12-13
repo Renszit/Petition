@@ -253,7 +253,6 @@ label {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #f2dfd7;
     margin-top: 10px;
     text-decoration: none;
 }
@@ -327,31 +326,111 @@ label {
 
 #turboButton {
     font-family: "Lato";
-    background-color: #A4243B;
-    width: 70px;
-    height: 70px;
+    background-color: #a4243b;
+    width: 90px;
+    height: 90px;
     position: fixed;
-    top:0;
-    left:0;
-    margin: 10px;
+    bottom: 0;
+    right: 50%;
+    transform: translateX(50%);
+    margin-bottom: 40px;
     border-radius: 50%;
-    border: solid 2px #A4243B;
-    box-shadow: inset 3px -3px 0px 4px rgba(0,0,0,0.33);
+    border: solid 2px #a4243b;
+    box-shadow: inset 3px -3px 0px 4px rgba(0, 0, 0, 0.33);
 }
 
 #turboButton:hover {
     font-family: "Lato";
     background-color: #f2dfd7;
-    width: 70px;
-    height: 70px;
-    position: fixed;
-    top:0;
-    left:0;
-    margin: 10px;
-    border-radius: 50%;
-    border: dashed 2px #A4243B;
+    border: dashed 2px #a4243b;
 }
 
+#hamburger {
+    width: 20px;
+    height: 20px;
+    position: fixed;
+    top: 0;
+    right: 0;
+    margin: 10px;
+    visibility: hidden;
+}
 
+#sidenav {
+    visibility: hidden;
+}
 
+@media screen and (min-width: 375px) and (max-width: 720px) {
+    .title {
+        font-size: 30px;
+        margin: 10px;
+        width: 100vw;
+    }
 
+    .checkitout {
+        font-size: 20px;
+        width: 100vw;
+    }
+
+    #turboButton {
+        visibility: hidden;
+    }
+
+    #turbo {
+        position: absolute;
+        bottom: 40px;
+        width: 100vw;
+        height: 200px;
+        margin-left: 0px;
+    }
+
+    .inputField {
+        width: 100vw;
+        padding: 10px;
+    }
+
+    #removeSig {
+        visibility: hidden;
+    }
+
+    #canvasInput {
+        width: 100vw;
+        align-content: center;
+        text-align: center;
+    }
+
+    #hamburger {
+        visibility: visible;
+    }
+
+    #logout {
+        visibility: hidden;
+    }
+
+    #sig {
+        width: 100vw;
+        margin: 10px;
+    }
+
+    .links {
+        font-family: "Lato";
+        color: #a4243b;
+        font-size: 30px;
+        width: 100%;
+    }
+
+    #sidenav {
+        position: absolute;
+        height: 100%;
+        text-align: right;
+        right: 0;
+        bottom: 0;
+        border-left: #a4243b 2px dashed;
+        padding: 20px;
+        background-color: #f2dfd7;
+    }
+
+    #x {
+        font-size: 30px;
+        font-family: "Lato";
+    }
+} ;
