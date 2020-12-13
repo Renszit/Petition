@@ -378,12 +378,7 @@ label {
     }
 
     #turbo {
-        position: absolute;
-        bottom: 40px;
-        width: 100vw;
-        height: 200px;
-        margin: 10px;
-        margin-left: 0px;
+        display:none;
     }
 
     .inputField {
