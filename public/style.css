@@ -373,10 +373,6 @@ label {
         width: 100vw;
     }
 
-    #turboButton {
-        visibility: hidden;
-    }
-
     #turbo {
         display: none;
     }
