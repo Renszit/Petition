@@ -4,16 +4,16 @@
 }
 
 body {
-    background-color: #eff7f6;
+    background-color: #f2dfd7;
 }
 
 a {
-    color: #f7d6e0;
+    color: #3891a6;
     text-decoration: dotted underline;
 }
 
 a:hover {
-    color: #e29578;
+    color: #3891a6;
     transition: ease;
     text-decoration: none;
 }
@@ -37,6 +37,7 @@ footer {
 
 .title {
     font-family: "Lato";
+    color: #0f1108;
     width: 80%;
     font-size: 60px;
     margin: 10px;
@@ -78,14 +79,14 @@ footer {
 
 .error {
     font-family: "Lato";
-    color: #e29578;
+    color: #898952;
     margin: 10px;
     text-align: center;
 }
 
 .checkitout {
     font-family: "Lato";
-    color: #f7d6e0;
+    color: #3891a6;
     font-size: 35px;
     margin: 10px;
     margin-top: 0;
@@ -96,8 +97,8 @@ footer {
 }
 
 canvas {
-    background-color: #eff7f6;
-    border: 1px dashed #75485e;
+    background-color: #f2dfd7;
+    border: 1px dashed #a4243b;
     cursor: crosshair;
 }
 
@@ -123,7 +124,7 @@ label {
     margin-left: 23px;
     height: 320px;
     object-fit: cover;
-    border: solid 2px #e29578;
+    border: solid 2px #3891a6;
 }
 
 /* submit button */
@@ -133,7 +134,7 @@ label {
     align-items: center;
     width: 400px;
     justify-content: center;
-    background: #eff7f6;
+    background: #f2dfd7;
     margin-top: 10px;
     text-decoration: none;
 }
@@ -141,18 +142,18 @@ label {
 .submit {
     font-family: "Lato";
     font-size: 24px;
-    color: #e29578;
+    color: #3891a6;
     position: relative;
     transform: scale(1);
     padding: 10px 50px 10px 20px;
     margin-right: 10px;
     border: none;
-    background-color: #eff7f6;
+    background-color: #f2dfd7;
     transition: all 0.3s;
 }
 
 .submit .bg {
-    background: #e29578;
+    background: #3891a6;
     width: 30px;
     height: 2px;
     position: absolute;
@@ -164,7 +165,7 @@ label {
 }
 
 .submit:hover {
-    color: #fff;
+    color: white;
     padding-right: 20px;
 }
 .submit:hover .bg {
@@ -178,7 +179,7 @@ label {
     content: "";
     height: 2px;
     width: 10px;
-    background: #e29578;
+    background: #3891a6;
     position: absolute;
     right: -2px;
     transition: all 0.3s;
@@ -229,7 +230,7 @@ label {
 }
 
 #sig {
-    border: 1px dashed #e29578;
+    border: 1px dashed #a4243b;
 }
 
 #thanksEdit {
@@ -244,7 +245,7 @@ label {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #eff7f6;
+    background: #f2dfd7;
     margin-top: 10px;
     text-decoration: none;
 }
@@ -272,9 +273,9 @@ label {
     font-family: "Lato";
     width: 90px;
     height: 40px;
-    background-color: #e29578;
-    color: #eff7f6;
-    border: 2px #e29578 solid;
+    background-color: #3891a6;
+    color: white;
+    border: 2px #3891a6 solid;
     position: fixed;
     bottom: 0;
     right: 0;
@@ -282,23 +283,23 @@ label {
 }
 
 #logout:hover {
-    background-color: #eff7f6;
-    color: #e29578;
-    border-top: dashed 2px #e29578;
-    border-left: dashed 2px #e29578;
+    background-color: #f2dfd7;
+    color: #3891a6;
+    border-top: dashed 2px #3891a6;
+    border-left: dashed 2px #3891a6;
     border-right: none;
     border-bottom: none;
-    width: 180px;
-    height: 80px;
+    width: 120px;
+    height: 60px;
 }
 
 #removeSig {
     font-family: "Lato";
     width: 150px;
     height: 30px;
-    background-color: #e29578;
+    background-color: #3891a6;
     color: #eff7f6;
-    border: 2px #e29578 solid;
+    border: 2px #3891a6 solid;
     position: fixed;
     top: 0;
     right: 0;
@@ -306,12 +307,12 @@ label {
 }
 
 #removeSig:hover {
-    background-color: #eff7f6;
-    color: #e29578;
-    border-bottom: dashed 2px #e29578;
-    border-left: dashed 2px #e29578;
+    background-color: #f2dfd7;
+    color: #3891a6;
+    border-bottom: dashed 2px #3891a6;
+    border-left: dashed 2px #3891a6;
     border-right: none;
     border-top: none;
-    width: 250px;
-    height: 60px;
+    width: 180px;
+    height: 40px;
 }
