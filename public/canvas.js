@@ -26,4 +26,26 @@
             signature.val(dataUrl);
         });
     });
+
+    canvas.on("touchstart", (event) => {
+        ctx.beginPath();
+        ctx.moveTo(event.pageX - xAxis, event.pageY - yAxis);
+
+        canvas.on("touchend", (event) => {
+            ctx.lineTo(event.pageX - xAxis, event.pageY - yAxis);
+            ctx.stroke();
+        });
+
+        canvas.on("touchend", () => {
+            canvas.off("touchmove");
+            const dataUrl = canvas[0].toDataURL();
+            signature.val(dataUrl);
+        });
+
+        canvas.on("touchend", () => {
+            canvas.off("touchmove");
+            const dataUrl = canvas[0].toDataURL();
+            signature.val(dataUrl);
+        });
+    });
 })();
