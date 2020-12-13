@@ -284,18 +284,18 @@ label {
     color: white;
     border: 2px #3891a6 solid;
     position: fixed;
-    bottom: 0;
-    right: 0;
+    top: 0;
+    left: 0;
     transition: 0.3s ease;
 }
 
 #logout:hover {
     background-color: #f2dfd7;
     color: #3891a6;
-    border-top: dashed 2px #3891a6;
-    border-left: dashed 2px #3891a6;
-    border-right: none;
-    border-bottom: none;
+    border-right: dashed 2px #3891a6;
+    border-bottom: dashed 2px #3891a6;
+    border-left: none;
+    border-top: none;
     width: 120px;
     height: 60px;
 }
@@ -328,6 +328,7 @@ label {
     font-family: "Lato";
     background-color: #a4243b;
     width: 90px;
+    color:white;
     height: 90px;
     position: fixed;
     bottom: 0;
@@ -342,6 +343,7 @@ label {
 #turboButton:hover {
     font-family: "Lato";
     background-color: #f2dfd7;
+    color: #a4243b;
     border: dashed 2px #a4243b;
 }
 
@@ -380,6 +382,7 @@ label {
         bottom: 40px;
         width: 100vw;
         height: 200px;
+        margin: 10px;
         margin-left: 0px;
     }
 
