@@ -1,10 +1,17 @@
 const express = require("express");
+const helmet = require("helmet");
 const app = express();
 const db = require("./db");
 const hb = require("express-handlebars");
 const csurf = require("csurf");
 const cookieSession = require("cookie-session");
 const { hash, compare } = require("./bc");
+
+app.use(
+    helmet({
+        contentSecurityPolicy: false,
+    })
+);
 
 app.use(express.static("./public"));
 
@@ -200,10 +207,12 @@ app.get("/thanks", requireLoggedInUser, requireSignedPetition, (req, res) => {
 });
 
 app.post("/thanks", requireLoggedInUser, (req, res) => {
-    db.deleteSig(req.session.userId).then(() => {
-        req.session.sigId = false;
-        res.redirect("petition");
-    }).catch((err) => console.log("error in removing signature", err));
+    db.deleteSig(req.session.userId)
+        .then(() => {
+            req.session.sigId = null;
+            res.redirect("petition");
+        })
+        .catch((err) => console.log("error in removing signature", err));
 });
 
 app.get("/edit", requireLoggedInUser, (req, res) => {
@@ -220,6 +229,7 @@ app.get("/edit", requireLoggedInUser, (req, res) => {
 app.post("/edit", (req, res) => {
     let { first, last, pass, email, age, city, homepage } = req.body;
     const userId = req.session.userId;
+
     if (pass) {
         hash(pass)
             .then((hash) => {

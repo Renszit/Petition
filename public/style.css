@@ -99,8 +99,6 @@ canvas {
     background-color: #eff7f6;
     border: 1px dashed #75485e;
     cursor: crosshair;
-    width: 600px;
-    height: 140px;
 }
 
 #canvasInput {
@@ -297,7 +295,7 @@ label {
 #removeSig {
     font-family: "Lato";
     width: 150px;
-    height: 20px;
+    height: 30px;
     background-color: #e29578;
     color: #eff7f6;
     border: 2px #e29578 solid;
@@ -305,4 +303,15 @@ label {
     top: 0;
     right: 0;
     transition: 0.3s ease;
+}
+
+#removeSig:hover {
+    background-color: #eff7f6;
+    color: #e29578;
+    border-bottom: dashed 2px #e29578;
+    border-left: dashed 2px #e29578;
+    border-right: none;
+    border-top: none;
+    width: 250px;
+    height: 60px;
 }

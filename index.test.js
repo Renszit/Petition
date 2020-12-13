@@ -9,7 +9,7 @@ test("Users who are logged out are redirected to registration when attempting to
     return supertest(app)
         .get("/petition")
         .then((response) => {
-            expect(response.headers.location).toBe("register");
+            expect(response.headers.location).toBe("/register");
         });
 });
 
@@ -20,7 +20,7 @@ test("Users who are logged in are redirected to the petition page when they atte
     return supertest(app)
         .get("/register")
         .then((response) => {
-            expect(response.headers.location).toBe("petition");
+            expect(response.headers.location).toBe("/petition");
         });
 });
 
@@ -31,7 +31,7 @@ test("Users who are logged in are redirected to the petition page when they atte
     return supertest(app)
         .get("/login")
         .then((response) => {
-            expect(response.headers.location).toBe("petition");
+            expect(response.headers.location).toBe("/petition");
         });
 });
 
