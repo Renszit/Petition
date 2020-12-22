@@ -124,8 +124,16 @@ app.post("/profile", (req, res) => {
     let { age, city, homepage } = req.body;
     db.profileData(age, city, homepage, req.session.userId)
         .then(() => {
-            if (req.session.sigId) {
-                res.redirect("thanks");
+            if (
+                homepage.startsWith("http://") ||
+                homepage.startsWith("https://") ||
+                homepage == ""
+            ) {
+                if (req.session.sigId) {
+                    res.redirect("thanks");
+                } else {
+                    res.redirect("petition");
+                }
             } else {
                 res.redirect("petition");
             }
@@ -236,13 +244,21 @@ app.post("/edit", (req, res) => {
                 db.updatePW(first, last, email, hash, userId);
             })
             .then(() => {
-                db.updateProfile(age, city, homepage, userId)
-                    .then(() => {
-                        res.redirect("thanks");
-                    })
-                    .catch((err) => {
-                        console.log("error in updateprofile", err);
-                    });
+                if (
+                    homepage.startsWith("http://") ||
+                    homepage.startsWith("https://") ||
+                    homepage == ""
+                ) {
+                    db.updateProfile(age, city, homepage, userId)
+                        .then(() => {
+                            res.redirect("thanks");
+                        })
+                        .catch((err) => {
+                            console.log("error in updateprofile", err);
+                        });
+                } else {
+                    res.redirect("edit");
+                }
             })
             .catch((err) => {
                 console.log("err in hash", err);
@@ -250,13 +266,21 @@ app.post("/edit", (req, res) => {
     } else {
         db.updateNoPw(first, last, email, userId)
             .then(() => {
-                db.updateProfile(age, city, homepage, userId)
-                    .then(() => {
-                        res.redirect("thanks");
-                    })
-                    .catch((err) => {
-                        console.log("error in updateprofile no pw", err);
-                    });
+                if (
+                    homepage.startsWith("http://") ||
+                    homepage.startsWith("https://") ||
+                    homepage == ""
+                ) {
+                    db.updateProfile(age, city, homepage, userId)
+                        .then(() => {
+                            res.redirect("thanks");
+                        })
+                        .catch((err) => {
+                            console.log("error in updateprofile no pw", err);
+                        });
+                } else {
+                    res.redirect("edit");
+                }
             })
             .catch((err) => {
                 console.log("err in update no pw", err);

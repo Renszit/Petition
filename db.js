@@ -99,11 +99,6 @@ module.exports.updateNoPw = (first, last, email, userId) => {
     return db.query(q, param);
 };
 
-// INSERT INTO actors(name, age, oscars)
-// VALUES ('Ingrid Bergman', 67, 4)
-// ON CONFLICT (name)
-// DO UPDATE SET age = 67, oscars=4;
-
 module.exports.updateProfile = (age, city, url, userId) => {
     const q = `INSERT INTO user_profiles(age,city,url,user_id)
     VALUES ($1,$2,$3,$4)
