@@ -16,10 +16,10 @@ Fun practice project with account creation and signature signing. Turbo buttons 
 
 ## Add an optional profile
 
-<img src="http://www.giphy.com/gifs/8qveg3OnsQ5ozzz0AX">
+<img src="https://media.giphy.com/media/8qveg3OnsQ5ozzz0AX/giphy.gif">
 
 ## sign petition on canvas
-<img src="https://media.giphy.com/media/8qveg3OnsQ5ozzz0AX/giphy.gif">
+<img src="https://media.giphy.com/media/hOeOrYU4yybintnnB0/giphy.gif">
 
 ## Edit your profile
 <img src="https://media.giphy.com/media/L41IeUpwKYlEqsH8MJ/giphy.gif">
